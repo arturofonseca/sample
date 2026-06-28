@@ -25,7 +25,7 @@ jobs:
         run: ruff format --check --output-format=github
 
       - name: Run Static Type Checker
-        run: ty --output-format=github
+        run: ty check --output-format=github
 
       - name: Run Tests
         run: pytest
