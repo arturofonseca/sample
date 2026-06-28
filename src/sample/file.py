@@ -2,4 +2,5 @@
 
 
 def flop() -> str:
+    """Ruff."""
     return None
