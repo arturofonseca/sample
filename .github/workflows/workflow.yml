@@ -1,9 +1,10 @@
-name: Test Suite
+name: CI
 
 on: [push]
 
 jobs:
   test_job:
+    name: Run Linters and Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -16,6 +17,15 @@ jobs:
 
       - name: Install Dependencies
         run: uv sync --locked --all-extras --dev
+
+      - name: Run Linter
+        run: ruff check --output-format=github
+
+      - name: Run Formatter
+        run: ruff format --check --output-format=github
+
+      - name: Run Static Type Checker
+        run: ty --output-format=github
 
       - name: Run Tests
         run: pytest
