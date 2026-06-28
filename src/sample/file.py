@@ -1,5 +1,5 @@
 """My file."""
 
 
-def flop() -> None:
+def flop() -> str:
     return None
