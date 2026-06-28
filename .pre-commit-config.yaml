@@ -1,0 +1,129 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: Check Ruff
+        description: Run 'ruff' for extremely fast Python linting
+        entry: ruff check --force-exclude --fix --fix-only --exit-non-zero-on-fix --unsafe-fixes
+        language: python
+        types_or: [python, pyi]
+        args: []
+        require_serial: true
+        additional_dependencies: []
+        stages: [pre-commit, pre-push, manual]
+
+      - id: ruff-format
+        name: Check Ruff Format
+        description: Run 'ruff format' for extremely fast Python formatting
+        entry: ruff format --force-exclude
+        language: python
+        types_or: [python, pyi]
+        args: []
+        require_serial: true
+        additional_dependencies: []
+        stages: [pre-commit, pre-push, manual]
+
+      - id: check-added-large-files
+        name: Check Added Large Files
+        entry: check-added-large-files
+        language: system
+        stages: [pre-commit, pre-push, manual]
+
+      - id: check-toml
+        name: Check Toml
+        entry: check-toml
+        language: system
+        types: [toml]
+        stages: [pre-commit, pre-push, manual]
+
+      - id: check-yaml
+        name: Check Yaml
+        # --unsafe allows this script to ignore unknown tags (like !Join)
+        entry: check-yaml --unsafe
+        language: system
+        types: [yaml]
+        stages: [pre-commit, pre-push, manual]
+
+      - id: check-xml
+        name: Check Xml
+        description: Checks xml files for parsable syntax
+        entry: check-xml
+        language: python
+        types: [xml]
+        stages: [pre-commit, pre-push, manual]
+
+      - id: check-json
+        name: Check Json
+        description: Checks json files for parsable syntax
+        entry: check-json
+        language: python
+        types: [json]
+
+      - id: check-merge-conflict
+        name: Check Merge Conflicts
+        description: Checks for files that contain merge conflict strings.
+        entry: check-merge-conflict
+        language: python
+        types: [text]
+
+      - id: end-of-file-fixer
+        name: Check End of Files
+        entry: end-of-file-fixer
+        language: system
+        types: [text]
+        stages: [pre-commit, pre-push, manual]
+
+      - id: trailing-whitespace
+        name: Check Trailing Whitespace
+        entry: trailing-whitespace-fixer
+        language: system
+        types: [text]
+        stages: [pre-commit, pre-push, manual]
+
+      - id: check-docstring-first
+        name: Check Docstring is First
+        description: checks a common error of defining a docstring after code
+        entry: check-docstring-first
+        language: python
+        types: [python]
+        stages: [pre-commit, pre-push, manual]
+
+      - id: detect-private-key
+        name: Check for Private Key
+        description: Detects the presence of private keys
+        entry: detect-private-key
+        language: python
+        types: [text]
+
+      - id: check-shebang-scripts-are-executable
+        name: Check Scripts are Executable
+        description: Ensures that (non-binary) files with a shebang are executable
+        entry: check-shebang-scripts-are-executable
+        language: python
+        types: [text]
+        stages: [pre-commit, pre-push, manual]
+
+      - id: check-executables-have-shebangs
+        name: Check Executables for Shebangs
+        description: Ensures that (non-binary) executables have a shebang
+        entry: check-executables-have-shebangs
+        language: python
+        types: [text, executable]
+        stages: [pre-commit, pre-push, manual]
+
+      - id: codespell
+        name: Check Codespell
+        description: Checks for common misspellings in text files
+        entry: codespell
+        language: python
+        types: [text]
+        stages: [pre-commit, pre-push, manual]
+
+      - id: no-commit-to-branch
+        name: Check Not Commiting to Protected Branches
+        description: Checks we do not commit to protected branches
+        entry: no-commit-to-branch
+        language: system
+        args: [--branch, dev, --branch, master]
+        stages: [pre-commit]
+        pass_filenames: false
