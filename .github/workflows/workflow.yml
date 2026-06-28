@@ -6,16 +6,14 @@ jobs:
   test_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v7
 
       - name: Install uv
         uses: astral-sh/setup-uv@v8.1.0
         with:
+          enable-cache: false
           activate-environment: true
 
-      - name: Install the project
-        run: uv sync --locked --all-extras --dev
-
-      - name: Run tests
+      - name: Run Tests
         run: pytest
