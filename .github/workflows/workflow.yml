@@ -16,19 +16,19 @@ jobs:
           activate-environment: true
 
       - name: Install Dependencies
-        run: uv sync --locked --all-extras --dev --color=always
+        run: uv sync --color=always --locked --all-groups
 
       - name: Run Linter
         if: always()
-        run: ruff check --output-format=github
+        run: ruff check --color=always --output-format=github
 
       - name: Run Formatter
         if: always()
-        run: ruff format --check --preview --output-format=github
+        run: ruff format --color=always --check --preview --output-format=github
 
       - name: Run Static Type Checker
         if: always()
-        run: ty check --output-format=github
+        run: ty check --color=always --output-format=github
 
       - name: Run Tests
         if: always()
