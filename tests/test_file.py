@@ -1,8 +1,8 @@
 """Test file."""
 
-# from sample.file import flop
+from sample.file import flop
 
 
 def test_flop():
     """Test hi."""
-    # flop()
+    flop()
