@@ -1,22 +1,17 @@
 """Conftest holding configuration and fixtures for use across the test suite."""
 
 from pathlib import Path
-from typing import TYPE_CHECKING
-
-
-if TYPE_CHECKING:
-    import pytest
 
 
 # Assumes this file lives in grp_.../test/
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-def pytest_sessionstart(session: pytest.Session) -> None:
+def pytest_sessionstart(session):
     """Prepare the session."""
 
 
-def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
+def pytest_sessionfinish(session, exitstatus):
     """Clean up after the session finishes."""
 
 

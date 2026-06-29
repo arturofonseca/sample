@@ -20,7 +20,6 @@ build-backend = "uv_build"
 dev = [
     "codespell>=2.4.2",
     "pre-commit>=4.6.0",
-    "pre-commit-hooks>=6.0.0",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
     "pytest-mock>=3.15.1",
@@ -37,13 +36,13 @@ quiet-level = 3
 # Codespell - https://pypi.org/project/coverage
 [tool.coverage]
 [tool.coverage.paths]
-source = ["src/my_lib"]
+source = ["src/sample"]
 tests = ["tests"]
 
 [tool.coverage.run]
 branch = true
 sigterm = true
-source = ["src/my_lib"]
+source = ["src/sample"]
 
 [tool.coverage.report]
 exclude_also = [
@@ -58,45 +57,28 @@ show_missing = true
 skip_empty = true
 
 [tool.coverage.html]
-directory = ["reports/htmlcov"]
+directory = "reports/htmlcov"
 
 [tool.coverage.xml]
-output = ["reports/coverage-results.xml"]
+output = "reports/coverage-results.xml"
 
 [tool.coverage.lcov]
 output = "lcov.info"
 
-# Mypy - https://pypi.org/project/mypy
-[tool.mypy]
-files = "src/my_lib"
-pretty = true
-show_column_numbers = true
-show_error_codes = true
-show_error_context = true
-strict = true
-warn_unreachable = true
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = ["tests.*"]
-disable_error_code = [
-    "no-untyped-def",
-    "method-assign",
-]
-
 # Pytest - https://pypi.org/project/pytest
 [tool.pytest]
-[tool.pytest.ini-options]
-addopts = "--color=yes --strict-markers --junit-xml=reports/xunit-results.xml -p no:ddtrace.pytest_bdd -p no:ddtrace.pytest_benchmark"
+[tool.pytest.ini_options]
+addopts = "--color=yes --strict-markers"
 testpaths = ["tests"]
 
 # Ruff - https://pypi.org/project/ruff
 [tool.ruff]
-src = ["src/my_lib"]
+src = ["src/sample"]
 line-length = 100
 indent-width = 4
 extend-include = ["*.ipynb"]
-fix = false
+fix = true
+unsafe-fixes = true
 target-version = "py314"
 
 [tool.ruff.lint]
@@ -198,7 +180,7 @@ convention = "google"
 max-args = 10
 
 [tool.ruff.lint.isort]
-known-first-party = ["my_lib"]
+known-first-party = ["sample"]
 lines-after-imports = 2
 
 [tool.ruff.format]
@@ -209,3 +191,17 @@ skip-magic-trailing-comma = false
 line-ending = "auto"
 docstring-code-format = true
 docstring-code-line-length = "dynamic"
+
+# Ty - https://pypi.org/project/ty
+[tool.ty.environment]
+python-version = "3.14"
+
+[tool.ty.terminal]
+error-on-warning = true
+
+[tool.ty.rules]
+division-by-zero = "error"
+possibly-missing-attribute = "error"
+possibly-missing-import = "error"
+possibly-unresolved-reference = "error"
+unused-ignore-comment = "error"

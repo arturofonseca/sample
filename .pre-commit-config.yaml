@@ -1,129 +1,71 @@
 repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-builtin-literals
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: name-tests-test
+        args: [--pytest-test-first]
+      - id: no-commit-to-branch
+      - id: pretty-format-json
+      - id: sort-simple-yaml
+      - id: trailing-whitespace
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.11.25
+    hooks:
+      - id: uv-lock
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.20
+    hooks:
+      - id: ruff-check
+        args: [--exit-non-zero-on-fix]
+      - id: ruff-format
+        args: [--exit-non-zero-on-format]
+
   - repo: local
     hooks:
-      - id: ruff
-        name: Check Ruff
-        description: Run 'ruff' for extremely fast Python linting
-        entry: ruff check --force-exclude --fix --fix-only --exit-non-zero-on-fix --unsafe-fixes
-        language: python
-        types_or: [python, pyi]
-        args: []
-        require_serial: true
-        additional_dependencies: []
-        stages: [pre-commit, pre-push, manual]
-
-      - id: ruff-format
-        name: Check Ruff Format
-        description: Run 'ruff format' for extremely fast Python formatting
-        entry: ruff format --force-exclude
-        language: python
-        types_or: [python, pyi]
-        args: []
-        require_serial: true
-        additional_dependencies: []
-        stages: [pre-commit, pre-push, manual]
-
-      - id: check-added-large-files
-        name: Check Added Large Files
-        entry: check-added-large-files
-        language: system
-        stages: [pre-commit, pre-push, manual]
-
-      - id: check-toml
-        name: Check Toml
-        entry: check-toml
-        language: system
-        types: [toml]
-        stages: [pre-commit, pre-push, manual]
-
-      - id: check-yaml
-        name: Check Yaml
-        # --unsafe allows this script to ignore unknown tags (like !Join)
-        entry: check-yaml --unsafe
-        language: system
-        types: [yaml]
-        stages: [pre-commit, pre-push, manual]
-
-      - id: check-xml
-        name: Check Xml
-        description: Checks xml files for parsable syntax
-        entry: check-xml
-        language: python
-        types: [xml]
-        stages: [pre-commit, pre-push, manual]
-
-      - id: check-json
-        name: Check Json
-        description: Checks json files for parsable syntax
-        entry: check-json
-        language: python
-        types: [json]
-
-      - id: check-merge-conflict
-        name: Check Merge Conflicts
-        description: Checks for files that contain merge conflict strings.
-        entry: check-merge-conflict
-        language: python
-        types: [text]
-
-      - id: end-of-file-fixer
-        name: Check End of Files
-        entry: end-of-file-fixer
-        language: system
-        types: [text]
-        stages: [pre-commit, pre-push, manual]
-
-      - id: trailing-whitespace
-        name: Check Trailing Whitespace
-        entry: trailing-whitespace-fixer
-        language: system
-        types: [text]
-        stages: [pre-commit, pre-push, manual]
-
-      - id: check-docstring-first
-        name: Check Docstring is First
-        description: checks a common error of defining a docstring after code
-        entry: check-docstring-first
+      - id: ty
+        name: ty check
+        entry: ty check
+        args: [--fix]
         language: python
         types: [python]
-        stages: [pre-commit, pre-push, manual]
 
-      - id: detect-private-key
-        name: Check for Private Key
-        description: Detects the presence of private keys
-        entry: detect-private-key
-        language: python
-        types: [text]
+  - repo: https://github.com/crate-ci/typos
+    rev: v1
+    hooks:
+      - id: typos
 
-      - id: check-shebang-scripts-are-executable
-        name: Check Scripts are Executable
-        description: Ensures that (non-binary) files with a shebang are executable
-        entry: check-shebang-scripts-are-executable
-        language: python
-        types: [text]
-        stages: [pre-commit, pre-push, manual]
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.49.0
+    hooks:
+      - id: markdownlint-fix
 
-      - id: check-executables-have-shebangs
-        name: Check Executables for Shebangs
-        description: Ensures that (non-binary) executables have a shebang
-        entry: check-executables-have-shebangs
-        language: python
-        types: [text, executable]
-        stages: [pre-commit, pre-push, manual]
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 1.0.0
+    hooks:
+      - id: mdformat
 
-      - id: codespell
-        name: Check Codespell
-        description: Checks for common misspellings in text files
-        entry: codespell
-        language: python
-        types: [text]
-        stages: [pre-commit, pre-push, manual]
-
-      - id: no-commit-to-branch
-        name: Check Not Commiting to Protected Branches
-        description: Checks we do not commit to protected branches
-        entry: no-commit-to-branch
-        language: system
-        args: [--branch, dev, --branch, master]
-        stages: [pre-commit]
-        pass_filenames: false
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.37.3
+    hooks:
+      - id: check-github-workflows

@@ -1,0 +1,35 @@
+name: Python Project
+
+on: [push]
+
+jobs:
+  check_quality:
+    name: Check Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+        with:
+          activate-environment: true
+
+      - name: Install Dependencies
+        run: uv sync --color=always --locked --all-groups
+
+      - name: Run Linter
+        if: always()
+        run: ruff check --color=always --output-format=github
+
+      - name: Run Formatter
+        if: always()
+        run: ruff format --color=always --check --preview --output-format=github
+
+      - name: Run Static Type Checker
+        if: always()
+        run: ty check --color=always --output-format=github
+
+      - name: Run Tests
+        if: always()
+        run: pytest --cov
