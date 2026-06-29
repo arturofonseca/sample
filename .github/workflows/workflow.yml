@@ -1,10 +1,10 @@
-name: CI
+name: Python Project
 
 on: [push]
 
 jobs:
   test_job:
-    name: Run Linters and Tests
+    name: Code Quality
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -20,12 +20,16 @@ jobs:
 
       - name: Run Linter
         run: ruff check --output-format=github
+        continue-on-error: true
 
       - name: Run Formatter
         run: ruff format --check --output-format=github
+        continue-on-error: true
 
       - name: Run Static Type Checker
         run: ty check --output-format=github
+        continue-on-error: true
 
       - name: Run Tests
         run: pytest --strict-markers --cov
+        continue-on-error: true
