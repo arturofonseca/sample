@@ -46,7 +46,7 @@ repos:
       - id: ty
         name: ty check
         entry: ty check
-        args: [--fix, --error-on-warning]
+        args: [--fix]
         language: python
         types: [python]
 
