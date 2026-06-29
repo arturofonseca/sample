@@ -19,17 +19,17 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: Run Linter
+        if: always()
         run: ruff check --output-format=github
-        continue-on-error: true
 
       - name: Run Formatter
+        if: always()
         run: ruff format --check --output-format=github
-        continue-on-error: true
 
       - name: Run Static Type Checker
+        if: always()
         run: ty check --output-format=github
-        continue-on-error: true
 
       - name: Run Tests
+        if: always()
         run: pytest --strict-markers --cov
-        continue-on-error: true
