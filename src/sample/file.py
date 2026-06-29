@@ -3,4 +3,4 @@
 
 def flop() -> str:
     """Ruff."""
-    return None
+    return ""

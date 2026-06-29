@@ -66,24 +66,6 @@ output = ["reports/coverage-results.xml"]
 [tool.coverage.lcov]
 output = "lcov.info"
 
-# Mypy - https://pypi.org/project/mypy
-[tool.mypy]
-files = "src/sample"
-pretty = true
-show_column_numbers = true
-show_error_codes = true
-show_error_context = true
-strict = true
-warn_unreachable = true
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = ["tests.*"]
-disable_error_code = [
-    "no-untyped-def",
-    "method-assign",
-]
-
 # Pytest - https://pypi.org/project/pytest
 [tool.pytest]
 [tool.pytest.ini_options]
@@ -96,7 +78,8 @@ src = ["src/sample"]
 line-length = 100
 indent-width = 4
 extend-include = ["*.ipynb"]
-fix = false
+fix = true
+unsafe-fixes = true
 target-version = "py314"
 
 [tool.ruff.lint]
@@ -209,3 +192,7 @@ skip-magic-trailing-comma = false
 line-ending = "auto"
 docstring-code-format = true
 docstring-code-line-length = "dynamic"
+
+# Ty - https://pypi.org/project/ty
+[tool.ty.environment]
+python-version = "3.14"
