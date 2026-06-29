@@ -57,10 +57,10 @@ show_missing = true
 skip_empty = true
 
 [tool.coverage.html]
-directory = ["reports/htmlcov"]
+directory = "reports/htmlcov"
 
 [tool.coverage.xml]
-output = ["reports/coverage-results.xml"]
+output = "reports/coverage-results.xml"
 
 [tool.coverage.lcov]
 output = "lcov.info"
@@ -68,7 +68,7 @@ output = "lcov.info"
 # Pytest - https://pypi.org/project/pytest
 [tool.pytest]
 [tool.pytest.ini_options]
-addopts = "--color=yes --strict-markers --junit-xml=reports/xunit-results.xml"
+addopts = "--strict-markers"
 testpaths = ["tests"]
 
 # Ruff - https://pypi.org/project/ruff

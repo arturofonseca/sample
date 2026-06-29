@@ -1,6 +1,8 @@
 """Test file."""
 
+# from sample.file import flop
 
-def test_hi():
+
+def test_flop():
     """Test hi."""
-    assert 1
+    # flop()
