@@ -3,8 +3,8 @@ name: Python Project
 on: [push]
 
 jobs:
-  test_job:
-    name: Code Quality
+  check_quality:
+    name: Check Quality
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Formatter
         if: always()
-        run: ruff format --check --output-format=github
+        run: ruff format --check --preview --output-format=github
 
       - name: Run Static Type Checker
         if: always()
@@ -32,4 +32,4 @@ jobs:
 
       - name: Run Tests
         if: always()
-        run: pytest --strict-markers --cov
+        run: pytest --color=yes --strict-markers --cov
