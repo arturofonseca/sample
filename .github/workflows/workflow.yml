@@ -32,4 +32,4 @@ jobs:
 
       - name: Run Tests
         if: always()
-        run: pytest --color=yes --strict-markers --cov
+        run: pytest --cov

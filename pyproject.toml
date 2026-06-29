@@ -68,7 +68,7 @@ output = "lcov.info"
 # Pytest - https://pypi.org/project/pytest
 [tool.pytest]
 [tool.pytest.ini_options]
-addopts = "--strict-markers"
+addopts = "--color=yes --strict-markers oee"
 testpaths = ["tests"]
 
 # Ruff - https://pypi.org/project/ruff
