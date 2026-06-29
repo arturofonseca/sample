@@ -1,9 +1,9 @@
-name: Python Project
+name: CI
 
 on: [push]
 
 jobs:
-  check_quality:
+  test:
     name: Check Quality
     runs-on: ubuntu-latest
     steps:
